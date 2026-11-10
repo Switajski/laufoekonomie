@@ -21,6 +21,14 @@ QUELLEN = {
                "516d1f3b4b3d2248ca96326b212c7f397fa5ee4d/data.csv",
         "sha256": "1c24d2252a14c71918644b6903a16f3e3008759c2330a5a6a0f01e9b385db9c9",
         "repo": "https://github.com/mikeyfera1/running-races-strava",
+        "lizenz": None,
+    },
+    "strava-distanz-pace": {
+        "url": "https://raw.githubusercontent.com/TheSkep/Running_Data_Analysis/"
+               "0820061e58c476fffec5d2d3200e1292a11329a8/Data/filtered.csv.gz",
+        "sha256": "ce8f6838412f9f496e4b324d8e55bed96684651c51ec2a54c069d8eed976ccd7",
+        "repo": "https://github.com/TheSkep/Running_Data_Analysis",
+        "lizenz": "MIT",
     },
 }
 
@@ -81,3 +89,23 @@ def lade_laeufe() -> pd.DataFrame:
     schlaege = d.hf * d.dauer_min
     d["ef"] = np.where(d.plausibel & d.hf.notna(), d.km * 1000 / schlaege, np.nan)
     return d
+
+
+def lade_distanz_pace() -> pd.DataFrame:
+    """TheSkep/Running_Data_Analysis: Distanz und Pace von ~4,1 Mio. Strava-Läufen.
+
+    Achtung: Eine Zeile ist der Mittelwert aller Läufe eines Athleten auf derselben
+    Distanz (gerundet auf 0,1 km), kein Einzellauf. Kein Datum, keine HF, keine Hm.
+    Die Athleten-IDs sind von der Quelle bereits anonymisiert.
+
+    Spalten: athlet, km, pace_s (s/km), pace (min/km dezimal).
+    """
+    roh = pd.read_csv(lade_rohdaten("strava-distanz-pace"), dtype={"AthleteID": str})
+    teile = roh["Pace"].str.split(":", expand=True).astype(int)
+    pace_s = teile[0] * 60 + teile[1]
+    return pd.DataFrame({
+        "athlet": "S-" + roh["AthleteID"],
+        "km": roh["Distance"],
+        "pace_s": pace_s,
+        "pace": pace_s / 60,
+    })

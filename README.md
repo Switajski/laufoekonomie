@@ -56,6 +56,7 @@ Die Herleitung steht in Notebook 01.
 | Datensatz | Inhalt | Lizenz |
 |---|---|---|
 | [mikeyfera1/running-races-strava](https://github.com/mikeyfera1/running-races-strava) | 42.116 Läufe von 116 Strava-Nutzern, je Lauf Summen und Mittelwerte | keine angegeben |
+| [TheSkep/Running_Data_Analysis](https://github.com/TheSkep/Running_Data_Analysis) | 4,1 Mio. Läufe von 3,0 Mio. Strava-Nutzern, nur Distanz (2–50 km) und Pace; je Athlet und Distanz gemittelt, IDs anonymisiert | MIT (Daten per Scraper erhoben) |
 
 **Regeln:**
 1. **Daten Dritter werden nicht in diesem Repo gespeichert.** Der Code lädt sie zur
@@ -97,6 +98,7 @@ Alternativ öffnest du den Ordner in VS Code mit der Jupyter-Erweiterung und wä
 - [ ] 03: Panel-Modell (gepoolt vs. Fixed Effects vs. Random Effects, Hausman-Test)
 - [ ] 04: Nichtlinearitäten und Interaktionen (Dauer², Dauer × Hm)
 - [ ] 05: Wochenumfang und Belastungsverlauf von Ultraläufern
+- [ ] 06: Ermüdungskurve Pace über Distanz (Riegel-Exponent) an 4 Mio. Läufen; Signifikanz vs. Effektgröße bei riesigem n
 - [ ] Veröffentlichung als Website mit Quarto und GitHub Pages
 - [ ] Lizenzanfrage an die Datensatz-Autoren
 
